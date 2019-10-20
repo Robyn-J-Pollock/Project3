@@ -24,7 +24,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	@Override
 	void dateTimeNow() {
 		LocalDateTime ldt = LocalDateTime.now();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm aa");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
 		System.out.print("Current Date/Time: " + ldt.format(dtf));
 	}
 	
@@ -53,8 +53,8 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("H:mm");
 		output.append("Time on Server: " + lt.format(dtf));
 		output.append("\nGMT: " + lt.plusHours(5).format(dtf));
-		output.append("\nBST: " + lt.plusHours(11).format(dtf));
-		output.append("\nCST: " + lt.format(dtf));
+		output.append("\nBST (90E): " + lt.plusHours(11).format(dtf));
+		output.append("\nCST (90W): " + lt.format(dtf));
 		System.out.print(output.toString());
 	}
 
@@ -74,13 +74,9 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		dateTimeMap.put("BST", ldt.plusHours(11));
 		dateTimeMap.put("CST", ldt);
 		StringBuffer output = new StringBuffer();
-		Iterator<Entry<String, LocalDateTime>> it = dateTimeMap.entrySet().iterator();
-		while(it.hasNext()) {
-			Entry<String, LocalDateTime> pair = it.next();
-			output.append(pair.getKey() + ": " + pair.getValue().format(dtf));
-			if (it.hasNext())
-				output.append("\n");
-		}
+		output.append("GMT: " + dateTimeMap.get("GMT").format(dtf) + "\n");
+		output.append("BST: " + dateTimeMap.get("BST").format(dtf) + "\n");
+		output.append("CST: " + dateTimeMap.get("CST").format(dtf));
 		System.out.print(output.toString());
 	}
 
@@ -118,25 +114,26 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		dateTimeMap.put("ZST", LocalDateTime.of(2018, 11, 05, 19, 59));
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		StringBuffer output = new StringBuffer();
-		Iterator<Entry<String, LocalDateTime>> it = dateTimeMap.entrySet().iterator();
 		output.append("Print Style 1:\n");
-		while(it.hasNext()) {
-			Entry<String, LocalDateTime> pair = it.next();
-			output.append(pair.getKey() + ": " + pair.getValue().format(dtf) + "\n");
-		}
+		output.append("AST " + dateTimeMap.get("AST").format(dtf) + "\n");
+		output.append("BST " + dateTimeMap.get("BST").format(dtf) + "\n");
+		output.append("CST " + dateTimeMap.get("CST").format(dtf) + "\n");
+		output.append("GMT " + dateTimeMap.get("GMT").format(dtf) + "\n");
+		output.append("ZST " + dateTimeMap.get("ZST").format(dtf) + "\n");
 		output.append("Print Style 3:\n");
 		output.append(dateTimeMap.get("AST").format(dtf) + "\n");
 		output.append(dateTimeMap.get("CST").format(dtf) + "\n");
 		output.append(dateTimeMap.get("GMT").format(dtf) + "\n");
 		output.append(dateTimeMap.get("BST").format(dtf) + "\n");
 		output.append(dateTimeMap.get("ZST").format(dtf) + "\n");
-		dtf = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm");
-		output.append("Print Style 5: Final sorted Array\n");
+		dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		output.append("Print Style 5: Final sorted Array:\n");
 		output.append(dateTimeMap.get("AST").format(dtf) + "\n");
 		output.append(dateTimeMap.get("BST").format(dtf) + "\n");
 		output.append(dateTimeMap.get("GMT").format(dtf) + "\n");
 		output.append(dateTimeMap.get("CST").format(dtf) + "\n");
-		output.append(dateTimeMap.get("ZST").format(dtf) + "\n");
+		output.append(dateTimeMap.get("ZST").format(dtf));
+		System.out.print(output);
 	}
    
 }

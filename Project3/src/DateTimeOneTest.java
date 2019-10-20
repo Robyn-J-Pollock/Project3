@@ -37,9 +37,9 @@ public class DateTimeOneTest {
 		dto.dateTimeNow();
 		String actual = outContent.toString();
 		outContent.reset();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm aa");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
 		String expected = "Current Date/Time: " + ldt.format(dtf);
-		assertTrue(expected.contentEquals(actual));
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -62,10 +62,10 @@ public class DateTimeOneTest {
 		dto.dateTimeOfOtherCity();
 		String actual = outContent.toString();
 		outContent.reset();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("H:mm");
 		String expected = "Time on Server: " + lt.format(dtf) + "\nGMT: " + lt.plusHours(5).format(dtf)
 			+ "\nBST (90E): " + lt.plusHours(11).format(dtf) + "\nCST (90W): " + lt.format(dtf);
-		assertTrue(expected.contentEquals(actual));
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -77,7 +77,7 @@ public class DateTimeOneTest {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		String expected = "GMT: " + ldt.plusHours(5).format(dtf) + "\nBST: "
 				+ ldt.plusHours(11).format(dtf) + "\nCST: " + ldt.format(dtf);
-		assertTrue(expected.contentEquals(actual));
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -87,15 +87,15 @@ public class DateTimeOneTest {
 		String actual = outContent.toString();
 		outContent.reset();
 		DateTimeFormatter pStyle1 = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
-		DateTimeFormatter pStyle5 = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm");
+		DateTimeFormatter pStyle5 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		String expected = "Print Style 1:\nAST 10/01/2020 19:59\nBST " 
 				+ ldt.plusHours(11).format(pStyle1) + "\nCST " + ldt.format(pStyle1)
 				+ "\nGMT " + ldt.plusHours(5).format(pStyle1) + "\nZST 11/05/2018 19:59"
-				+ "\nPrint Style 3:\n10/01/2020 19:59\n" +  "\n" + ldt.format(pStyle1) 
-				+ "\n" + ldt.plusHours(5).format(pStyle1) + ldt.plusHours(11).format(pStyle1) + "\n11/05/2018 19:59"
-				+ "\nPrint Style 5: Final sorted Array:\n2020-10-01T19:59" + ldt.plusHours(11).format(pStyle5) 
-				+ ldt.plusHours(5).format(pStyle5) + "\n" + ldt.format(pStyle5) + "\n2018-11-05T19:59";
-		assertTrue(expected.contentEquals(actual));
+				+ "\nPrint Style 3:\n10/01/2020 19:59\n" + ldt.format(pStyle1) 
+				+ "\n" + ldt.plusHours(5).format(pStyle1) + "\n" + ldt.plusHours(11).format(pStyle1) + "\n11/05/2018 19:59"
+				+ "\nPrint Style 5: Final sorted Array:\n2020-10-01T19:59\n" + ldt.plusHours(11).format(pStyle5) 
+				+ "\n" + ldt.plusHours(5).format(pStyle5) + "\n" + ldt.format(pStyle5) + "\n2018-11-05T19:59";
+		assertEquals(expected, actual);
 	}
 	
 	@After
