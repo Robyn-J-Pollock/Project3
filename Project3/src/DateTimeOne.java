@@ -1,13 +1,20 @@
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class DateTimeOne extends MesoDateTimeOneAbstract
 {
+	HashMap<String, LocalDateTime> dateTimeMap;
 	/*
 	 * Returns value of the current second
 	 */
 	@Override
 	int getValueOfSecond() {
-		// TODO Auto-generated method stub
-		return 0;
+		LocalTime lt = LocalTime.now();
+		return lt.getSecond();
 	}
 	
 	/*
@@ -16,17 +23,17 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	 */
 	@Override
 	void dateTimeNow() {
-		// TODO Auto-generated method stub
-		
+		LocalDateTime ldt = LocalDateTime.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm aa");
+		System.out.print("Current Date/Time: " + ldt.format(dtf));
 	}
 	
 	/*
 	 * 
 	 */
 	@Override
-	void sleepForFiveSec() {
-		// TODO Auto-generated method stub
-		
+	void sleepForFiveSec() throws InterruptedException {
+		Thread.sleep(5000);
 	}
 	
 	/*
@@ -41,8 +48,14 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	 */
 	@Override
 	void dateTimeOfOtherCity() {
-		// TODO Auto-generated method stub
-		
+		StringBuffer output = new StringBuffer();
+		LocalTime lt = LocalTime.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("H:mm");
+		output.append("Time on Server: " + lt.format(dtf));
+		output.append("\nGMT: " + lt.plusHours(5).format(dtf));
+		output.append("\nBST: " + lt.plusHours(11).format(dtf));
+		output.append("\nCST: " + lt.format(dtf));
+		System.out.print(output.toString());
 	}
 
 	/*
@@ -54,8 +67,21 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	 */
 	@Override
 	void dateTimeDifferentZone() {
-		// TODO Auto-generated method stub
-		
+		dateTimeMap = new HashMap<String, LocalDateTime>();
+		LocalDateTime ldt = LocalDateTime.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+		dateTimeMap.put("GMT", ldt.plusHours(5));
+		dateTimeMap.put("BST", ldt.plusHours(11));
+		dateTimeMap.put("CST", ldt);
+		StringBuffer output = new StringBuffer();
+		Iterator<Entry<String, LocalDateTime>> it = dateTimeMap.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<String, LocalDateTime> pair = it.next();
+			output.append(pair.getKey() + ": " + pair.getValue().format(dtf));
+			if (it.hasNext())
+				output.append("\n");
+		}
+		System.out.print(output.toString());
 	}
 
 	/*
@@ -83,7 +109,34 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	@Override
 	void timeZoneHashMap() {
 		// TODO Auto-generated method stub
-		
+		dateTimeMap = new HashMap<String, LocalDateTime>();
+		LocalDateTime ldt = LocalDateTime.now();
+		dateTimeMap.put("AST", LocalDateTime.of(2020, 10, 01, 19, 59));
+		dateTimeMap.put("BST", ldt.plusHours(11));
+		dateTimeMap.put("CST", ldt);
+		dateTimeMap.put("GMT", ldt.plusHours(5));
+		dateTimeMap.put("ZST", LocalDateTime.of(2018, 11, 05, 19, 59));
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+		StringBuffer output = new StringBuffer();
+		Iterator<Entry<String, LocalDateTime>> it = dateTimeMap.entrySet().iterator();
+		output.append("Print Style 1:\n");
+		while(it.hasNext()) {
+			Entry<String, LocalDateTime> pair = it.next();
+			output.append(pair.getKey() + ": " + pair.getValue().format(dtf) + "\n");
+		}
+		output.append("Print Style 3:\n");
+		output.append(dateTimeMap.get("AST").format(dtf) + "\n");
+		output.append(dateTimeMap.get("CST").format(dtf) + "\n");
+		output.append(dateTimeMap.get("GMT").format(dtf) + "\n");
+		output.append(dateTimeMap.get("BST").format(dtf) + "\n");
+		output.append(dateTimeMap.get("ZST").format(dtf) + "\n");
+		dtf = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm");
+		output.append("Print Style 5: Final sorted Array\n");
+		output.append(dateTimeMap.get("AST").format(dtf) + "\n");
+		output.append(dateTimeMap.get("BST").format(dtf) + "\n");
+		output.append(dateTimeMap.get("GMT").format(dtf) + "\n");
+		output.append(dateTimeMap.get("CST").format(dtf) + "\n");
+		output.append(dateTimeMap.get("ZST").format(dtf) + "\n");
 	}
    
 }

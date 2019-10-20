@@ -44,11 +44,16 @@ public class DateTimeOneTest {
 	
 	@Test
 	public void testSleepForFiveSec() {
-		int startTime = LocalTime.now().toSecondOfDay();
-		dto.sleepForFiveSec();
-		int actual = LocalTime.now().toSecondOfDay();
-		int expectedMin = startTime + 5;
-		assertTrue(actual >= expectedMin);
+		try {
+			int startTime = LocalTime.now().toSecondOfDay();
+			dto.sleepForFiveSec();
+			int actual = LocalTime.now().toSecondOfDay();
+			int expectedMin = startTime + 5;
+			assertTrue(actual >= expectedMin);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -86,10 +91,10 @@ public class DateTimeOneTest {
 		String expected = "Print Style 1:\nAST 10/01/2020 19:59\nBST " 
 				+ ldt.plusHours(11).format(pStyle1) + "\nCST " + ldt.format(pStyle1)
 				+ "\nGMT " + ldt.plusHours(5).format(pStyle1) + "\nZST 11/05/2018 19:59"
-				+ "\nPrint Style 3:\n10/01/2020 19:59\n" + ldt.plusHours(11).format(pStyle1)
-				+ "\n" + ldt.format(pStyle1) + "\n" + ldt.plusHours(5).format(pStyle1) + "\n11/05/2018 19:59"
-				+ "\nPrint Style 5: Final sorted Array:\n2020-10-01T19:59" + ldt.plusHours(11).format(pStyle5)
-				+ "\n" + ldt.format(pStyle5) + "\n" + ldt.plusHours(5).format(pStyle5) + "\n2018-11-05T19:59";
+				+ "\nPrint Style 3:\n10/01/2020 19:59\n" +  "\n" + ldt.format(pStyle1) 
+				+ "\n" + ldt.plusHours(5).format(pStyle1) + ldt.plusHours(11).format(pStyle1) + "\n11/05/2018 19:59"
+				+ "\nPrint Style 5: Final sorted Array:\n2020-10-01T19:59" + ldt.plusHours(11).format(pStyle5) 
+				+ ldt.plusHours(5).format(pStyle5) + "\n" + ldt.format(pStyle5) + "\n2018-11-05T19:59";
 		assertTrue(expected.contentEquals(actual));
 	}
 	
