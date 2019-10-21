@@ -1,11 +1,14 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class MesoLexicographical extends MesoSortedAbstract
 {
-	private Map<String, Integer> newMap;
+	private TreeMap<String, Integer> newMap;
 	public MesoLexicographical(HashMap<String, Integer> hashMap) {
-		newMap = sortedMap(hashMap);
+		newMap = new TreeMap<String, Integer>();
 	}
 
 	/*
@@ -17,7 +20,22 @@ public class MesoLexicographical extends MesoSortedAbstract
 	@Override
 	Map<String, Integer> sortedMap(HashMap<String, Integer> unsorted) {
 		// TODO Auto-generated method stub
-		return null;
+		for (String key : unsorted.keySet()) {
+			newMap.put(key, unsorted.get(key));
+		}
+		
+		StringBuffer output = new StringBuffer();
+		Iterator<String> it = newMap.keySet().iterator();
+		while (it.hasNext()) {
+			String next = it.next();
+			output.append(next);
+			if (it.hasNext())
+				output.append("\n");
+		}
+		
+		System.out.print(output.toString());
+			
+		return newMap;
 	}
 
 }
