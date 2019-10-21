@@ -5,7 +5,10 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -70,7 +73,7 @@ public class DateTimeTwoTest {
 		for(Integer x = 1;  x < 11; x++)
 		{
 			Period interval = Period.between(today, textDates.get(x));
-			expected.append(textDates.get(x) + " is ")
+			expected.append(textDates.get(x) + " is ");
 			if (!textDates.get(x).isLeapYear()) 
 				expected.append("not ");
 			expected.append("a leap year, and Difference: " + interval.getYears() + " years, " + interval.getMonths() + " months, and " + interval.getDays() +".");
@@ -82,11 +85,43 @@ public class DateTimeTwoTest {
 	
 	@Test
 	public void dateHashMap() {
+		dtt.dateHashMap();
+		String actual = outContent.toString();
+		outContent.reset();
 		
+		StringBuffer expected = new StringBuffer();
+		Iterator<Integer> it = textDates.keySet().iterator();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		expected.append("Key:value");
+		while (it.hasNext())
+		{
+			Integer keyValue = it.next();
+			expected.append("\n" + textDates.get(keyValue).format(dtf) + ":" + keyValue);
+		}
+		
+		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void dateHashMapSorted() {
+		dtt.dateHashMapSorted();
+		String actual = outContent.toString();
+		outContent.reset();
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		StringBuffer expected = new StringBuffer();
+		expected.append(textDates.get(8).format(dtf) + ":8\n");
+		expected.append(textDates.get(5).format(dtf) + ":5\n");
+		expected.append(textDates.get(7).format(dtf) + ":7\n");
+		expected.append(textDates.get(6).format(dtf) + ":6\n");
+		expected.append(textDates.get(4).format(dtf) + ":4\n");
+		expected.append(textDates.get(10).format(dtf) + ":10\n");
+		expected.append(textDates.get(9).format(dtf) + ":9\n");
+		expected.append(textDates.get(1).format(dtf) + ":1\n");
+		expected.append(textDates.get(2).format(dtf) + ":2\n");
+		expected.append(textDates.get(3).format(dtf) + ":3");
+		
+		assertEquals(expected, actual);
 		
 	}
 	
