@@ -18,6 +18,7 @@ public class Main
 {
 	public static void main(String[] args) throws IOException 
 	{
+		
 		/**
 		 * This project has been divided in sections. 
 		 * Keep in mind, the code given here all are related. Section has been created to give you 
@@ -38,7 +39,7 @@ public class Main
 		
 		/**
 		 * Section 1
-		 * Current value of “Second” will be stored in vlaueOfSecondNow 
+		 * Current value of Seconds will be stored in vlaueOfSecondNow 
 		 * and will print as, "The value of Second now: 58"
 		 * Remember, this is the format only, value should be the current time.
 		 */

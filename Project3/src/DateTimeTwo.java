@@ -15,7 +15,7 @@ public class DateTimeTwo {
 	private LocalDate currentDate;
 	private HashMap<LocalDate, Integer> datesMap;
 	
-	private DateTimeTwo() {
+	public DateTimeTwo() {
 		currentDate = LocalDate.now();
 		datesMap = new HashMap<LocalDate, Integer>();
 	}
@@ -41,7 +41,7 @@ public class DateTimeTwo {
 		int intLastDay = LocalDate.of(year, month, 1).lengthOfMonth();
 		String lastDay = LocalDate.of(year, month, intLastDay).getDayOfWeek().toString().toUpperCase();
 		String output = String.format("For the year (%d) and month (%d), the fifteenth day"
-				+ "is %s and the last day is %s", year, month, fifteenthDay, lastDay);
+				+ " is %s and the last day is %s", year, month, fifteenthDay, lastDay);
 		System.out.print(output.toString());
 	}
 	
@@ -62,22 +62,23 @@ public class DateTimeTwo {
 		while (lineRead != null)
 		{
 			x++;
-			String[] date = lineRead.split(".");
-			int year = Integer.parseInt(date[0]);
-			int month = Integer.parseInt(date[1]);
-			int day = Integer.parseInt(date[2]);
+			int year = Integer.parseInt(lineRead.substring(6, 10));
+			int day = Integer.parseInt(lineRead.substring(3,5));
+			int month = Integer.parseInt(lineRead.substring(0,2));
 			LocalDate localDateRead = LocalDate.of(year, month, day);
 			String isLeap = "not ";
 				if (localDateRead.isLeapYear())
 					isLeap = "";
 			Period timeDiff = Period.between(currentDate, localDateRead);
-			output.append(String.format("%s is %sa leap year, and Difference: %d years, %d months, and %3 days."
+			output.append(String.format("%s is %sa leap year, and Difference: %d years, %d months, and %d days."
 					,year, isLeap, timeDiff.getYears(), timeDiff.getMonths(), timeDiff.getDays()));
 			datesMap.put(localDateRead, x);
 			lineRead = br.readLine();
+			if (lineRead != null)
+				output.append("\n");
 		}
-		
-		System.out.print(output);
+		br.close();
+		System.out.print(output.toString());
 	}
 	
 	/*
@@ -92,10 +93,10 @@ public class DateTimeTwo {
 		StringBuffer output = new StringBuffer("Key:value");
 		while (it.hasNext()) {
 			LocalDate currentKey = it.next();
-			output.append("/n" + currentKey.format(dtf) + ":" + datesMap.get(currentKey));
+			output.append("\n" + currentKey.format(dtf) + ":" + datesMap.get(currentKey));
 		}
 		
-		System.out.print(output);
+		System.out.print(output.toString());
 	}
 	
 	/*
@@ -115,15 +116,16 @@ public class DateTimeTwo {
 			if (nextDate.isAfter(dateList.getLast()))
 				dateList.add(nextDate);
 			else {
-				for (int x = dateList.size() - 2; x >= 0; x--) {
-					boolean added = false;
+				boolean added = false;
+				for (int x = dateList.size() - 1; x >= 0; x--) {
 					if (nextDate.isAfter(dateList.get(x))) {
-						dateList.add(x, nextDate);
+						dateList.add(x + 1, nextDate);
 						added = true;
+						break;
 					}
-					if (added == false)
-						dateList.addFirst(nextDate);
 				}
+				if (added == false)
+					dateList.addFirst(nextDate);
 			}
 		}
 		StringBuffer output = new StringBuffer();
@@ -134,6 +136,6 @@ public class DateTimeTwo {
 			if (date != dateList.peekLast())
 				output.append("\n");
 		}
-		System.out.print(output);
+		System.out.print(output.toString());
 	}
 }

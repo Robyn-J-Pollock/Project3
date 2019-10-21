@@ -26,6 +26,7 @@ public class DateTimeTwoTest {
 	
 	@Before
 	public void setUp() {
+		textDates = new HashMap<Integer, LocalDate>();
 		System.setOut(new PrintStream(outContent));
 		System.setErr(new PrintStream(errContent));
 		dtt = new DateTimeTwo();
@@ -46,7 +47,7 @@ public class DateTimeTwoTest {
 		LocalDate ld = LocalDate.now();
 		String tenthDay = ld.withDayOfMonth(10).getDayOfWeek().toString().toUpperCase();
 		String etDay = ld.withDayOfMonth(18).getDayOfWeek().toString().toUpperCase();
-		String expected = "The tenth day of this month is " + tenthDay + "and eighteenth is " + etDay;
+		String expected = "The tenth day of this month is " + tenthDay + " and eighteenth is " + etDay;
 		dtt.daysOfCurrentMonth();
 		String actual = outContent.toString();
 		outContent.reset();
@@ -71,21 +72,24 @@ public class DateTimeTwoTest {
 		
 		StringBuffer expected = new StringBuffer();
 		LocalDate today = LocalDate.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
 		for(Integer x = 1;  x < 11; x++)
 		{
 			Period interval = Period.between(today, textDates.get(x));
-			expected.append(textDates.get(x) + " is ");
+			expected.append(textDates.get(x).format(dtf) + " is ");
 			if (!textDates.get(x).isLeapYear()) 
 				expected.append("not ");
-			expected.append("a leap year, and Difference: " + interval.getYears() + " years, " + interval.getMonths() + " months, and " + interval.getDays() +".");
+			expected.append("a leap year, and Difference: " + interval.getYears() + " years, " + interval.getMonths() + " months, and " + interval.getDays() +" days.");
 			if (x != 10)
 				expected.append("\n");
 		}
-		assertEquals(expected, actual);
+		assertEquals(expected.toString(), actual);
 	}
 	
 	@Test
-	public void dateHashMap() {
+	public void dateHashMap() throws IOException {
+		dtt.compareYear();
+		outContent.reset();
 		dtt.dateHashMap();
 		String actual = outContent.toString();
 		outContent.reset();
@@ -100,29 +104,31 @@ public class DateTimeTwoTest {
 			expected.append("\n" + textDates.get(keyValue).format(dtf) + ":" + keyValue);
 		}
 		
-		assertEquals(expected, actual);
+		assertEquals(expected.toString(), actual);
 	}
 	
 	@Test
-	public void dateHashMapSorted() {
+	public void dateHashMapSorted() throws IOException {
+		dtt.compareYear();
+		outContent.reset();
 		dtt.dateHashMapSorted();
 		String actual = outContent.toString();
 		outContent.reset();
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		StringBuffer expected = new StringBuffer();
-		expected.append(textDates.get(8).format(dtf) + ":8\n");
-		expected.append(textDates.get(5).format(dtf) + ":5\n");
-		expected.append(textDates.get(7).format(dtf) + ":7\n");
-		expected.append(textDates.get(6).format(dtf) + ":6\n");
-		expected.append(textDates.get(4).format(dtf) + ":4\n");
-		expected.append(textDates.get(10).format(dtf) + ":10\n");
-		expected.append(textDates.get(9).format(dtf) + ":9\n");
-		expected.append(textDates.get(1).format(dtf) + ":1\n");
-		expected.append(textDates.get(2).format(dtf) + ":2\n");
-		expected.append(textDates.get(3).format(dtf) + ":3");
+		expected.append(textDates.get(new Integer(8)).format(dtf) + ":8\n");
+		expected.append(textDates.get(new Integer(5)).format(dtf) + ":5\n");
+		expected.append(textDates.get(new Integer(7)).format(dtf) + ":7\n");
+		expected.append(textDates.get(new Integer(6)).format(dtf) + ":6\n");
+		expected.append(textDates.get(new Integer(4)).format(dtf) + ":4\n");
+		expected.append(textDates.get(new Integer(10)).format(dtf) + ":10\n");
+		expected.append(textDates.get(new Integer(9)).format(dtf) + ":9\n");
+		expected.append(textDates.get(new Integer(1)).format(dtf) + ":1\n");
+		expected.append(textDates.get(new Integer(2)).format(dtf) + ":2\n");
+		expected.append(textDates.get(new Integer(3)).format(dtf) + ":3");
 		
-		assertEquals(expected, actual);
+		assertEquals(expected.toString(), actual);
 		
 	}
 	
