@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class DateTimeTwo {
@@ -105,7 +106,34 @@ public class DateTimeTwo {
 	 */
 	public void dateHashMapSorted() {
 		Set<LocalDate> dateKeySet = datesMap.keySet();
-		ArrayList<LocalDate> dateList = new ArrayList<LocalDate>();
-		dateList = sortKeySet(dateKeySet);
+		LinkedList<LocalDate> dateList = new LinkedList<LocalDate>();
+		Iterator<LocalDate> it = dateKeySet.iterator();
+		LocalDate nextDate = it.next();
+		dateList.add(nextDate);
+		while(it.hasNext()) {
+			nextDate = it.next();
+			if (nextDate.isAfter(dateList.getLast()))
+				dateList.add(nextDate);
+			else {
+				for (int x = dateList.size() - 2; x >= 0; x--) {
+					boolean added = false;
+					if (nextDate.isAfter(dateList.get(x))) {
+						dateList.add(x, nextDate);
+						added = true;
+					}
+					if (added == false)
+						dateList.addFirst(nextDate);
+				}
+			}
+		}
+		StringBuffer output = new StringBuffer();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		for (LocalDate date : dateList)
+		{
+			output.append(date.format(dtf) + ":" + datesMap.get(date));
+			if (date != dateList.peekLast())
+				output.append("\n");
+		}
+		System.out.print(output);
 	}
 }
