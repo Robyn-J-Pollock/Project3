@@ -80,7 +80,7 @@ public class DateTimeTwoTest {
 			if (!textDates.get(x).isLeapYear()) 
 				expected.append("not ");
 			expected.append("a leap year, and Difference: " + interval.getYears() + " years, " + interval.getMonths() + " months, and " + interval.getDays() +" days.");
-			if (x != 10)
+			if (!x.equals(10))
 				expected.append("\n");
 		}
 		assertEquals(expected.toString(), actual);

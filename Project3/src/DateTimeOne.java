@@ -32,8 +32,12 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	 * 
 	 */
 	@Override
-	void sleepForFiveSec() throws InterruptedException {
-		Thread.sleep(5000);
+	void sleepForFiveSec() {
+		LocalTime start = LocalTime.now();
+		LocalTime finish = LocalTime.now();
+		while (start.plusSeconds(5).isAfter(finish)) {
+			finish = LocalTime.now();
+		}
 	}
 	
 	/*

@@ -9,6 +9,7 @@ public class MesoLexicographical extends MesoSortedAbstract
 	private TreeMap<String, Integer> newMap;
 	public MesoLexicographical(HashMap<String, Integer> hashMap) {
 		newMap = new TreeMap<String, Integer>();
+		sortedMap(hashMap);
 	}
 
 	/*
@@ -28,7 +29,7 @@ public class MesoLexicographical extends MesoSortedAbstract
 		Iterator<String> it = newMap.keySet().iterator();
 		while (it.hasNext()) {
 			String next = it.next();
-			output.append(next);
+			output.append(next + " " + newMap.get(next));
 			if (it.hasNext())
 				output.append("\n");
 		}

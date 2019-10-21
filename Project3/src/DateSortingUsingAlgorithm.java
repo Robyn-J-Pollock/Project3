@@ -38,8 +38,8 @@ public class DateSortingUsingAlgorithm {
 	
 	public void dateHashMapSortedDescending() {
 		LinkedList<LocalDate> decOrderDates = new LinkedList<LocalDate>();
-		decOrderDates.add(datesMap.get(new Integer(0)));
-		for(Integer x = 1; x < new Integer(datesMap.size()); x++) {
+		decOrderDates.add(datesMap.get(0));
+		for(Integer x = 1; x < datesMap.size(); x++) {
 			if (datesMap.get(x).isBefore(decOrderDates.peekLast())) {
 				decOrderDates.add(datesMap.get(x));
 			}
@@ -71,8 +71,8 @@ public class DateSortingUsingAlgorithm {
 	
 	public void dateHashMapSorted() {
 		LinkedList<LocalDate> decOrderDates = new LinkedList<LocalDate>();
-		decOrderDates.add(datesMap.get(new Integer(0)));
-		for(Integer x = 1; x < new Integer(datesMap.size()); x++) {
+		decOrderDates.add(datesMap.get(0));
+		for(Integer x = 1; x < datesMap.size(); x++) {
 			if (datesMap.get(x).isAfter(decOrderDates.peekLast())) {
 				decOrderDates.add(datesMap.get(x));
 			}

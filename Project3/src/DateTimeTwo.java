@@ -69,7 +69,7 @@ public class DateTimeTwo {
 			String isLeap = "not ";
 				if (localDateRead.isLeapYear())
 					isLeap = "";
-			Period timeDiff = Period.between(currentDate, localDateRead);
+			Period timeDiff = Period.between(localDateRead, currentDate);
 			output.append(String.format("%s is %sa leap year, and Difference: %d years, %d months, and %d days."
 					,year, isLeap, timeDiff.getYears(), timeDiff.getMonths(), timeDiff.getDays()));
 			datesMap.put(localDateRead, x);

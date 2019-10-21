@@ -11,15 +11,22 @@ public class MesoAsciiCal extends MesoAsciiAbstract
 	
 	@Override
 	int calAverage() {
-		double douAvgVal = 0;
+		double firstDouAvgVal = 0;
+		double secondDouAvgVal = 79;
 		for (char ch : stID) {
-			douAvgVal += (int) ch;
+			firstDouAvgVal += (int) ch;
 		}
-		douAvgVal = douAvgVal/stID.length;
-		int intAvgVal = (int) douAvgVal;
-		if (douAvgVal - (int) douAvgVal >= 0.5)
-			intAvgVal++;
-		return intAvgVal;
+		firstDouAvgVal = firstDouAvgVal/stID.length;
+		int firstIntAvgVal = (int) firstDouAvgVal;
+		if (firstDouAvgVal - firstIntAvgVal >= 0.25)
+			firstIntAvgVal++;
+		
+		double finalDouAvg = (firstDouAvgVal + secondDouAvgVal) / 2;
+		int finalIntAvg = (int) finalDouAvg;
+		if (finalDouAvg - finalIntAvg != 0)
+			finalIntAvg++;
+			
+		return finalIntAvg;
 	}
    
 }
