@@ -24,7 +24,7 @@ Task 22: Create JUnit test for DateSortingUsingAlgorithm
 Task 23: Finish JUnit test
 Task 24: Finish DateSortingUsingAlgorithm
 
-Task 25: Finished and Submitted to Zylabs. Corrected all errors EXCEPT
+#Task 25: Finished and Submitted to Zylabs. Corrected all errors EXCEPT
 	MesoLexicographical is not being accepted, I tried to change it to add
 	the values but that didn't take either. I'm unsure of what is wanted as 
 	an output for this class.
