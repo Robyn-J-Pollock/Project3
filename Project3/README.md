@@ -16,3 +16,4 @@ Task 14: Figure out which methods are needed for MesoAsciiCal.java
 Task 15: Create MesoEquivalent.java
 Task 16: Figure out what methods are needed for MesoEquivalent.java
 Task 17: Create MesoEquivalent JUnit test
+Task 18: Find what methods are needed for MesoLexicographical.java
