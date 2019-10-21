@@ -12,13 +12,13 @@ public class MesoAsciiCal extends MesoAsciiAbstract
 	@Override
 	int calAverage() {
 		double douAvgVal = 0;
-		for (char ch : stID)
-			douAvgVal = (int) ch;
+		for (char ch : stID) {
+			douAvgVal += (int) ch;
+		}
 		douAvgVal = douAvgVal/stID.length;
 		int intAvgVal = (int) douAvgVal;
 		if (douAvgVal - (int) douAvgVal >= 0.5)
 			intAvgVal++;
-			
 		return intAvgVal;
 	}
    

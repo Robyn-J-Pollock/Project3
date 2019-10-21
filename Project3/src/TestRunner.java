@@ -4,8 +4,10 @@ public class TestRunner {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		DateTimeTwo dtt = new DateTimeTwo();
-		dtt.compareYear();
+		MesoEquivalent meEq = new MesoEquivalent("NRMN");
+		meEq.calAsciiEqual();
+		System.out.println();
+		System.out.println(new MesoAsciiCal(new MesoStation("WOOD")).calAverage());
 	}
 
 }
