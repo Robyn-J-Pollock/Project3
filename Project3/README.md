@@ -17,3 +17,9 @@ Task 15: Create MesoEquivalent.java
 Task 16: Figure out what methods are needed for MesoEquivalent.java
 Task 17: Create MesoEquivalent JUnit test
 Task 18: Find what methods are needed for MesoLexicographical.java
+Task 19: Finish MesoLexicographical.java
+Task 20: Create DateSortingUsingAlgorithm.java
+Task 21: Figure out what methods are needed for DateSortingUsingAlgorithm.java
+Task 22: Create JUnit test for DateSortingUsingAlgorithm
+Task 23: Finish JUnit test
+Task 24: Finish DateSortingUsingAlgorithm
