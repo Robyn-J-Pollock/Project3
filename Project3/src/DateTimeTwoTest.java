@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
@@ -63,7 +64,7 @@ public class DateTimeTwoTest {
 	}
 	
 	@Test
-	public void compareYear() {
+	public void compareYear() throws IOException {
 		dtt.compareYear();
 		String actual = outContent.toString();
 		outContent.reset();
