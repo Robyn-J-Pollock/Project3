@@ -10,6 +10,17 @@ public class MesoLexicographical extends MesoSortedAbstract
 	public MesoLexicographical(HashMap<String, Integer> hashMap) {
 		newMap = new TreeMap<String, Integer>();
 		sortedMap(hashMap);
+		
+		StringBuffer output = new StringBuffer();
+		Iterator<String> it = newMap.keySet().iterator();
+		while (it.hasNext()) {
+			String next = it.next();
+			output.append(next);
+			if (it.hasNext())
+				output.append("\n");
+		}
+		
+		System.out.print(output.toString());
 	}
 
 	/*
@@ -24,17 +35,6 @@ public class MesoLexicographical extends MesoSortedAbstract
 		for (String key : unsorted.keySet()) {
 			newMap.put(key, unsorted.get(key));
 		}
-		
-		StringBuffer output = new StringBuffer();
-		Iterator<String> it = newMap.keySet().iterator();
-		while (it.hasNext()) {
-			String next = it.next();
-			output.append(next + " " + newMap.get(next));
-			if (it.hasNext())
-				output.append("\n");
-		}
-		
-		System.out.print(output.toString());
 			
 		return newMap;
 	}
